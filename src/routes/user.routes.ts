@@ -6,10 +6,11 @@ import {
     updateUser,
     deleteUser
 } from "../controllers/user.controller";
-
+import { validate } from "../middlewares/validate.middleware";
+import { createUserSchema } from "../validators/user.validator";
 const router = Router();
 
-router.post("/", createUser);
+router.post("/", validate(createUserSchema), createUser);
 router.get("/", getUsers);
 router.get("/:id", getUserById);
 router.put("/:id", updateUser);
